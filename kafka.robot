@@ -10,9 +10,9 @@ Resource         common.robot
 
 Send and receive kafka message
   ${random} =   Generate Random String  5  [NUMBERS]
-                Execute        echo "test1" | /opt/kafka/bin/kafka-console-producer.sh --broker-list kafka-broker-0:9092  --topic ${random}
-                Execute        echo "test2" | /opt/kafka/bin/kafka-console-producer.sh --broker-list kafka-broker-0:9092  --topic ${random}
-  ${output}     Execute        /opt/kafka/bin/kafka-console-consumer.sh  --bootstrap-server kafka-broker-0:9092 --topic ${random} --from-beginning --max-messages 2
+                Execute        echo "test1" | /opt/kafka/bin/kafka-console-producer.sh --broker-list kafka-broker-0:9092 --topic ${random}
+                Execute        echo "test2" | /opt/kafka/bin/kafka-console-producer.sh --broker-list kafka-broker-0:9092 --topic ${random}
+  ${output} =   Execute        /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka-broker-0:9092 --topic ${random} --from-beginning --max-messages 2
   Should contain  ${output}    test1
   Should contain  ${output}    test2
 
