@@ -5,7 +5,21 @@ Documentation    Test suite to check HDFS functionality
 Library          OperatingSystem
 Library          String
 Resource         common.robot
-
+Library          RequestsLibrary
+                  
+                  
+*** Keywords ***  
+Test HDFS port                                       
+   Create Session   webport  http://hdfs-namenode-0.hdfs-namenode:9820
+   ${resp} =  Get Request  webport  /                   
+   Should Be Equal As Strings  ${resp.status_code}  404
+   Should Contain  ${resp.text}  It looks like 
+                                                                            
+*** Test Cases ***                                                          
+                                                                            
+Test HDFS is Up and running                                                 
+   Wait Until Keyword Succeeds  10x  3s  Test HDFS port                      
+                 
 *** Test Cases ***
 
 Test HDFS Cli
